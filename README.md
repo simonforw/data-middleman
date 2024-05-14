@@ -1,7 +1,7 @@
-# data-middleman（数据中间人）
+## data-middleman（数据中间人）
 用于负责采集snmp-exporter收集到的数据，并使用Prometheus能够接受的格式转发给Pushgateway。
 
-# 运行
+## 运行
 1.修改SNMP_EXPORTER_BASE_URL参数中[snmp-exporterIP]、[snmp-exporterPort]、[job name]为您自定义的相关参数。
 ``` bash
   [snmp-exporterIP]：snmp-exporter采集端IP地址；
@@ -19,5 +19,5 @@ SNMP_TARGETS = ['192.168.1.1', '192.168.2.1','172.16.1.1']
 ```
 4.run
 
-# 基本逻辑
+## 基本逻辑
 首先查询snmp-exporter收集的网络设备信息，将数据格式化为Prometheus能够识别的格式，发送至Pushgateway组件，如果此脚本与Pushgateway或snmp-exporter无法通信，则会产生报错“Failed to fetch metrics from snmp-exporter for {target}: {response.status_code}”，反之提示“Metrics pushed to Pushgateway for {target} successfully.”，每60秒查询并推送一次。
